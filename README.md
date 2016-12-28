@@ -47,7 +47,7 @@
 - [**API Design Guidelines**](#api-design-guidelines)
   - [API 命名](#api-%E5%91%BD%E5%90%8D)
     - [提倡清晰的用法](#%E6%8F%90%E5%80%A1%E6%B8%85%E6%99%B0%E7%9A%84%E7%94%A8%E6%B3%95)
-    - [尽量流利的使用](#%E5%B0%BD%E9%87%8F%E6%B5%81%E5%88%A9%E7%9A%84%E4%BD%BF%E7%94%A8)
+    - [[尽量]()流利的使用](#%E5%B0%BD%E9%87%8F%E6%B5%81%E5%88%A9%E7%9A%84%E4%BD%BF%E7%94%A8)
   - [约定](#%E7%BA%A6%E5%AE%9A)
     - [一般约定](#%E4%B8%80%E8%88%AC%E7%BA%A6%E5%AE%9A)
     - [参数](#%E5%8F%82%E6%95%B0)
@@ -68,9 +68,7 @@
 
 #### 大小写
 
-类型 (类，结构体，枚举和协议) 命名应该是 **Upper**CamelCase 的形式，其他所有的命名全部是 **lower**CamelCase 的形式。
-
-**Preferred:**
+类型 (类，结构体，枚举和协议) 命名应该是 UpperCamelCase 的形式，其他所有的命名全部是 lowerCamelCase 的形式。
 
 ```swift
 private let maximumWidgetCount = 100
@@ -81,70 +79,22 @@ class WidgetContainer {
 }
 ```
 
-**Not Preferred:**
-
-```swift
-let MAX_WIDGET_COUNT = 100
-
-class app_widgetContainer {
-    var wBut: UIButton
-    let wHeightPct = 0.85
-}
-```
 #### 缩写
 
 避免使用缩写和首字母略缩词，缩写词出现的时候尽量全部大写，不过如果缩写被用于命名的起始，那么就全部小写。
-
-**Preferred:**
 
 ```swift
 let urlString: URLString
 let userID: UserID
 ```
 
-**Not Preferred:**
-```swift
-let uRLString: UrlString
-let userId: UserId
-```
-可接受的缩写：
-
-- 长期以来就在 C 语言中使用的缩写。
-- 在命名参数的时候可以比较自由的使用缩写（比如 `imageRep` ,  `col`(column),  `obj` , and `otherWin`）。
-
-| 缩写      | 解释                                       |
-| ------- | ---------------------------------------- |
-| alloc   | Allocate.                                |
-| alt     | Alternate.                               |
-| app     | Application. For example, NSApp the global application object. However, “application” is spelled out in delegate methods, notifications, and so on. |
-| calc    | Calculate.                               |
-| dealloc | Deallocate.                              |
-| func    | Function.                                |
-| horiz   | Horizontal.                              |
-| info    | Information.                             |
-| init    | Initialize (for methods that initialize new objects). |
-| int     | Integer (in the context of a C `int`—for an `NSInteger` value, use `integer`). |
-| max     | Maximum.                                 |
-| min     | Minimum.                                 |
-| msg     | Message.                                 |
-| nib     | Interface Builder archive.               |
-| pboard  | Pasteboard (but only in constants).      |
-| rect    | Rectangle.                               |
-| Rep     | Representation (used in class name such as `NSBitmapImageRep`). |
-| temp    | Temporary.                               |
-| vert    | Vertical.                                |
-
-计算机行业常用的缩写也可适用，如：
-
-`ASCII`, `PDF`, `XML`, `HTML`, `URL`, `RTF`, `HTTP`, `TIFF`, `JPG`, `PNG`, `GIF`, `LZW`, `ROM`, `RGB`, `CMYK`, `MIDI`, `FTP`
-
 #### 协议
 
-描述是什么的协议读起来应该是个名词：`Collection`, `WidgetFactory`，描述能力的协议应该用 able、ible、 ing 作为后缀：`Equatable`, `Resizing`。
+描述是什么的协议读起来应该是个名词：`Collection`,  `WidgetFactory`，描述能力的协议应该用 able、ible、 ing 作为后缀：`Equatable`,  `Resizing`。如果前两种方法都不能明确表达，可以给它加上 `protocol` 后缀。
 
 #### 枚举
 
-Swift3 中枚举值规定用小写开头。
+Swift 3 中枚举值规定用小写开头。
 
 ```swift
 enum Shape {
@@ -156,7 +106,7 @@ enum Shape {
 ```
 #### 类前缀
 
-Swift 类型自动被模块名设置了名称空间，所以不需要加前缀。如果两个来自不同模块（即target）的命名冲突了，可以附加一个模块名到类型命名的前面来消除冲突。
+Swift 类型自动被模块名设置了名称空间，所以不需要加前缀。如果两个来自不同模块（即 target）的命名冲突了，可以附加一个模块名到类型命名的前面来消除冲突。
 
 ```swift
 import SomeModule
@@ -181,22 +131,12 @@ let sel = #selector(ViewController.viewDidLoad)
 ```
 #### 泛型
 
-泛型参数应该是 **upper**camelcase 形式，尽量使参数名描述它的作用，如果参数名并没有有意义的关系或角色，那么就用单个大写字母表示：`T`, `U`,或 `V`。
-
-**Preferred:**
+泛型参数应该是 uppercamelcase 形式，尽量使参数名描述它的作用，如果参数名并没有有意义的关系或角色，那么就用单个大写字母表示：`T`, `U`,或 `V`。
 
 ```swift
 struct Stack<Element> { ... }
 func writeTo<Target: OutputStream>(inout target: Target)
 func max<T: Comparable>(x: T, _ y: T) -> T
-```
-
-**Not Preferred:**
-
-```swift
-struct Stack<T> { ... }
-func writeTo<target: OutputStream>(inout t: target)
-func max<Thing: Comparable>(x: Thing, _ y: Thing) -> Thing
 ```
 
 ### 代码结构
@@ -207,31 +147,17 @@ func max<Thing: Comparable>(x: Thing, _ y: Thing) -> Thing
 
 当我们对一个类添加协议时，推荐使用一个单独的类扩展来实现协议的方法。这可以保持协议相关的方法聚合在一起，同时也可以简单的标识出一个协议对应类中需要实现哪些对应的方法。
 
-**Preferred:**
-
 ```swift
-class MyViewcontroller: UIViewController {
-    // class stuff here
-}
+class MyViewcontroller: UIViewController { }
 
 // MARK: - UITableViewDataSource
-extension MyViewcontroller: UITableViewDataSource {
-    // table view data source methods
-}
+extension MyViewcontroller: UITableViewDataSource { }
 
 // MARK: - UIScrollViewDelegate
-extension MyViewcontroller: UIScrollViewDelegate {
-    // scroll view delegate methods
-}
+extension MyViewcontroller: UIScrollViewDelegate { }
 ```
 
-**Not Preferred:**
-```swift
-class MyViewcontroller: UIViewController, UITableViewDataSource, UIScrollViewDelegate {
-    // all methods
-}
-```
-因为编译器不允许派生类重复遵守父类的协议，所以不是必须复制父类的扩展组到派生类结构中，特别是当派生类是个端点类并且只有少数方法需要被重写的时候。如果父类本身自带多个协议，如：`UITableViewController`，也没必要单独创建两个扩展做数据源和代理。关于这条规则的 issue: [Protocol conformance](https://github.com/raywenderlich/swift-style-guide/issues/116)。
+因为编译器不允许派生类重复遵守父类的协议，所以不是必须复制父类的扩展组到派生类结构中，特别是当派生类是个终点类并且只有少数方法需要被重写的时候。如果父类本身自带多个协议，如：`UITableViewController`，也没必要单独创建两个扩展做数据源和代理。关于这条规则的 issue: [Protocol conformance](https://github.com/raywenderlich/swift-style-guide/issues/116)。
 
 注：[Overriding declarations from extensions](https://github.com/ksm/SwiftInFlux/blob/master/README.md#overriding-declarations-from-extensions) 。由于当前 Swift 只能在扩展里重写兼容 Objective-C 的方法和属性，那么只有添加 `@objc` 标记或者基类是 `NSObject` 的类中的方法才能在扩展当中被重写。
 
@@ -251,18 +177,6 @@ extension Swift {
 }
 ```
 
-#### 无用代码
-
-无用的代码和注释要删除 ，避免给阅读代码的人造成困惑和疑问。
-
-但你自己用来指导其他人怎么使用被注释代码的注释不用删除，如定义在父类中需要被子类重写的方法：
-
-```swift
-func setupConstraints() {
-    // Overridden in a subclass
-}
-```
-
 #### 最小量的导入
 
 保持最小量的导入，比如当导入 `Foundation` 能够满足需求的时候就不要导入 `UIKit`。
@@ -273,48 +187,41 @@ func setupConstraints() {
 
 结构体实例总是通过值传递，类实例总是通过引用传递。
 
-按照通用的准则，当符合一条或多条以下条件时，请考虑构建结构体：
+使用 struct 来代替 class 作为数据模型有很多好处。值类型是非常有优势的：
 
-- 该数据结构的主要目的是用来封装少量相关简单数据值。
-- 有理由预计该数据结构的实例在被赋值或传递时，封装的数据将会被拷贝而不是被引用。
-- 该数据结构中储存的值类型属性，也应该被拷贝，而不是被引用。
-- 该数据结构不需要去继承另一个既有类型的属性或者行为。
+- 安全性：因为 struct 是用值类型传递的，它们没有引用计数。
 
-举例来说，以下情境中适合使用结构体：
+- 内存：由于他们没有引用数，他们不会因为循环引用导致内存泄漏。
 
-- 几何形状的大小，封装一个 `width` 属性和 `height` 属性，两者均为 `Double` 类型。
-- 一定范围内的路径，封装一个 `start` 属性和 `length` 属性，两者均为 `Int` 类型。
-- 三维坐标系内一点，封装 `x`，`y` 和 `z` 属性，三者均为 `Double` 类型。
+- 速度：值类型通常来说是以栈的形式分配的，而不是用堆。因此他们比 class 要快很多。
 
-在所有其它案例中，定义一个类，生成一个它的实例，并通过引用来管理和传递。实际中，这意味着绝大部分的自定义数据构造都应该是类，而非结构体。
+- 拷贝：在 Objective-C 里拷贝一个对象必须选用正确的拷贝类型（深拷贝、浅拷贝）。 Swift 中值类型的拷贝则非常轻松。
 
-#### struct 的优点
+- 线程安全：值类型是自动线程安全的。无论你从哪个线程去访问你的 struct ，都非常简单。
 
-使用 struct 来代替 class 作为数据模型有很多好处。值类型（value type）是非常有优势的：
+但是现有项目中使用 RxSwift， viewModel 中的各种 map、filter 方法都是 `@escape` 闭包，在 Swift 3 中限制逃逸闭包不可以隐式捕获 `inout` 参数， 所以 struct 的 mutating 方法中不能使用逃逸闭包。
 
-- 安全性
+注：[Limiting inout capture to @noescape contexts](https://github.com/apple/swift-evolution/blob/master/proposals/0035-limit-inout-capture.md)
 
-  因为 struct 是用值类型传递的，它们没有引用计数。
+如下一段 RxSwift 代码， filter 是一个逃逸闭包，`changedCellModels` 是一个数组，如果此时类型是 struct 则会报错：**Closure cannot implicitly capture a mutating self parameter**。所以这种需要修改自身属性的 viewModel 采用 class 类型。
 
-- 内存
+```swift
+fileprivate mutating func updateTreatment() -> Observable<Bool> {
+    return  submitButtonDidTap
+        .filter{ _ in
+            self.changedCellModels = self.cellModels
+                .filter { return $0.hasChanged.value == true }
+            if self.changedCellModels.isEmpty {
+                self.updateInvalid.onNext(Void())
+            }
+            return !self.changedCellModels.isEmpty
+        }
+        // etc
+        ..........
+}
+```
 
-  由于他们没有引用数，他们不会因为循环引用导致内存泄漏。
-
-- 速度
-
-  值类型通常来说是以栈的形式分配的，而不是用堆。因此他们比 class 要快很多。
-
-- 拷贝
-
-  在 Objective-C 里拷贝一个对象必须选用正确的拷贝类型（深拷贝、浅拷贝），这是非常烦人的，因为每次尝试你都不记得自己上次是怎么写的。 Swift 中值类型的拷贝则非常轻松。
-
-- 线程安全
-
-  值类型是自动线程安全的。无论你从哪个线程去访问你的 struct ，都非常简单。
-
-基于这些优势项目 model 和 viewmodel 采用 struct。
-
-注：[Swift: 把 Struct 作为数据模型的注意事项](http://swift.gg/2016/07/22/swift-caveats-for-structs-as-data-models/)，[结构体和值类型](https://objccn.io/issue-16-2/)，[Controlling Complexity in Swift — or — Making Friends with Value Types](https://realm.io/news/andy-matuschak-controlling-complexity/) 
+一般来说 viewController 的 viewModel 常出现这种情况，view（如各种 cell） 的 viewModel则很少出现，所以在项目中前一类使用 class 类型，后一类采用 struct 类型（遇到前述需要修改自身值的情况可换做 class）。
 
 #### self 关键字的使用
 
@@ -325,11 +232,9 @@ func setupConstraints() {
 ```swift
 class BoardLocation {
     let row: Int, column: Int
-
     init(row: Int, column: Int) {
         self.row = row
         self.column = column
-
         let closure = {
             print(self.row)
         }
@@ -340,45 +245,15 @@ class BoardLocation {
 
 为了保持简洁，如果一个计算属性是只读的，请忽略掉 `get` 语句。只有在需要定义 `set` 语句的时候，才提供 `get` 语句。
 
-**Preferred:**
-
 ```swift
 var diameter: Double {
     return radius * 2
 }
 ```
 
-**Not Preferred:**
-```swift
-var diameter: Double {
-    get {
-        return radius * 2
-    }
-}
-```
 #### 属性观察
 
 尽管可以在 `willSet`、`didSet` 以及 `set` 方法中使用自定义的名称，但还是用默认的 `newValue`、`oldValue`变量名统一风格。
-
-```swift
-var computedProperty: String {
-    get {
-        if someBool {
-            return "I'm a mighty pirate!"
-        }
-        return "I'm selling these fine leather jackets."
-    }
-    set {
-        computedProperty = newValue
-    }
-    willSet {
-        print("will set to \(newValue)")
-    }
-    didSet {
-        print("did set from \(oldValue) to \(newValue)")
-    }
-}
-```
 
 #### 懒加载属性
 
@@ -386,7 +261,6 @@ var computedProperty: String {
 
 ```swift
 lazy var locationManager: CLLocationManager = self.makeLocationManager()
-
 private func makeLocationManager() -> CLLocationManager {
     let manager = CLLocationManager()
     manager.desiredAccuracy = kCLLocationAccuracyBest
@@ -417,7 +291,7 @@ func reticulateSplines(spline: [Double]) -> Bool {
 }
 ```
 
-在一个长的函数定义时，在适当的地方进行换行，同时在下一行中添加一个额外的缩进：
+在一个长的函数定义时，在适当的地方进行换行：
 
 ```swift
 func reticulateSplines(spline: [Double], adjustmentFactor: Double,
@@ -432,15 +306,14 @@ func reticulateSplines(spline: [Double], adjustmentFactor: Double,
 func pirateName() -> (firstName: String, lastName: String) {
     return ("Guybrush", "Threepwood")
 }
-
 let name = pirateName()
 let firstName = name.firstName
 let lastName = name.lastName
 ```
 
-多参数过长时的调用规范参考了 [linkedin/**swift-style-guide**](https://github.com/linkedin/swift-style-guide#1-code-formatting)，如下：
+**多参数过长时的调用：**
 
--  在调用参数过长的多参数函数的时候，把多个参数放置到单独的行中，**左对齐**。
+在调用参数过长的多参数函数的时候，把多个参数放置到单独的行中，左对齐。
 
 ```swift
 let alert = UIAlertController(
@@ -450,7 +323,7 @@ let alert = UIAlertController(
 )
 ```
 
-- 对于大型的数组或者字典类型，应该将其分割到多行内，`[` 与 `]` 类比于花括号进行处理。对于闭包而言也应该同样适合于该规则（如果第一个参数无参数标签，则不单独放在一行）。
+对于大型的数组或者字典类型，应该将其分割到多行内，`[` 与 `]` 类比于花括号进行处理。对于闭包而言也应该同样适合于该规则（如果第一个参数无参数标签，则不单独放在一行）。
 
 ```swift
 someFunctionWithABunchOfArguments(noLableArgument,
@@ -468,9 +341,7 @@ someFunctionWithABunchOfArguments(noLableArgument,
 )
 ```
 
--  尽可能地使用本地变量的方式来避免多行的判断语句。
-
-**Preferred:**
+尽可能地使用本地变量的方式来避免多行的判断语句。
 
 ```swift
 let firstCondition = x == firstReallyReallyLongPredicateFunction()
@@ -481,14 +352,20 @@ if firstCondition && secondCondition && thirdCondition {
 }
 ```
 
+**自定义代理方法的第一个参数应该是被代理方，且不包含外部名。**
+
+**Preferred:**
+
+```swift
+func namePickerView(_ namePickerView: NamePickerView, didSelectName name: String)
+func namePickerViewShouldReload(_ namePickerView: NamePickerView) -> Bool
+```
+
 **Not Preferred:**
 
 ```swift
-if x == firstReallyReallyLongPredicateFunction()
-    && y == secondReallyReallyLongPredicateFunction()
-    && z == thirdReallyReallyLongPredicateFunction() {
-    // do something
-}
+func didSelectName(namePicker: NamePickerViewController, name: String)
+func namePickerShouldReload() -> Bool
 ```
 
 ### 闭包表达式
@@ -544,19 +421,16 @@ let value = numbers
     .map { $0 + 10 }
 ```
 
-关于闭包的其他规范参考了 [linkedin/**swift-style-guide**](https://github.com/linkedin/swift-style-guide#38-closures)，如下：
-
-- 如果闭包中的某个参数的类型是显而易见的，那么可以避免声明类型。如果闭包内容语义简单，参数名称可以简写为 `$0`, `$1`, `$2`等。
+如果闭包中的某个参数的类型是显而易见的，那么可以避免声明类型。如果闭包内容语义简单，参数名称可以简写为 `$0`, `$1`, `$2 ` 等。
 
 ```swift
 doSomethingWithClosure() { response in
     print(response)
 }
-
 [1, 2, 3].flatMap { String($0) }
 ```
 
-- 在参数列表中，如果是使用了捕获变量或者声明了非 `Void` 返回值，那么应该将参数列表写在一个圆括号里，其他情况下则可以省略圆括号。
+在参数列表中，如果是使用了捕获变量或者声明了非 `Void` 返回值，那么应该将参数列表写在一个圆括号里，其他情况下则可以省略圆括号。
 
 ```swift
 doSomethingWithClosure() { [weak self] (response: NSURLResponse) in
@@ -568,7 +442,7 @@ doSomethingWithClosure() { (response) -> String in
 }
 ```
 
-- 对于编译器提示的没有非 `Void` 返回值然而有圆括号的情况应该手动删除圆括号。
+对于编译器提示的没有非 `Void` 返回值然而有圆括号的情况应该手动删除圆括号。
 
 **Preferred**
 
@@ -586,17 +460,15 @@ tableView.snp_makeConstraints { (make) in
 }
 ```
 
-- 如果你是将闭包声明为一个类型，那么除非该类型为 Optional 或者该闭包是另一个闭包的参数，否则不需要使用圆括号进行包裹。不过需要用圆括号来标注参数列表，并且使用 `Void` 来指明没有任何结果返回。
+如果你是将闭包声明为一个类型，那么除非该类型为 Optional 或者该闭包是另一个闭包的参数，否则不需要使用圆括号进行包裹。不过需要用圆括号来标注参数列表，并且使用 `Void` 来指明没有任何结果返回。
 
 ```swift
 let completionBlock: (success: Bool) -> Void = {
     print("Success? \(success)")
 }
-
 let completionBlock: () -> Void = {
     print("Completed!")
 }
-
 let completionBlock: (() -> Void)? = nil
 ```
 
@@ -622,97 +494,48 @@ let widthString: NSString = width.stringValue        // NSString
 
 常量定义使用 `let` 关键字，变量定义使用 `var` 关键字，如果变量的值不需要改变，请尽量使用 `let` 关键字。可以先使用 `let` 定义任何东西，只有在编译器告诉我们值需要改变的时候才改成 `var` 定义。
 
-使用 `static let` 将常量定义为类属性而不是实例属性，定义为类属性而不是全局常量是因为在实际运用中类属性不会和局部变量和实例属性混淆。
-
-**Preferred:**
+使用 `static let` 将常量定义为类属性而不是实例属性，定义为类属性而不是全局常量是因为在实际运用中类属性不会和局部变量和实例属性混淆。所有的类常量需要被包含在一个 `enum`  容器中（不可初始化，比 `class` 和 `struct` 好）。且该容器名是个单数（ 用 `Constant`  而不是  `Constants`）且能表示它是个常量容器，如果不能明确表示时给它加上 `Constant` 后缀。
 
 ```swift
-struct Math {
-    static let e  = 2.718281828459045235360287
-    static let pi = 3.141592653589793238462643
+enum AccessibilityIdentifier {
+    static let pirateButton = "pirateButton"
 }
-
-radius * Math.pi * 2 // circumference
-```
-
-**Not Preferred:**
-
-```swift
-let e  = 2.718281828459045235360287  // pollutes global namespace
-let pi = 3.141592653589793238462643
-
-radius * pi * 2 // is pi instance data or a global constant?
+enum ColorConstant {
+    static let white = UIClor.white
+}
+static let shared = MyClassName()
 ```
 
 #### 可选类型
 
-当 `nil` 值是可以接受的时候时，用 `?` 定义变量和函数返回值为可选类型。
-
 当我们命名一个可选变量和属性时，避免使用诸如 `optionalString` 和 `maybeView` 这样的命名，因为可选值的表达已经在类型定义中了。
 
-访问一个可选值时，如果只需要访问一次或者在可选值链中有多个可选值时，使用可选值链：
-
-```swift
-self.textContainer?.textLabel?.setNeedsDisplay()
-```
-
 一次性可以操作多个可选值绑定，避免太多 if 语句嵌套：
-
-**Preferred:**
 
 ```swift
 var subview: UIView?
 var volume: Double?
 
-if let subview = subview, volume = volume {
+if let subview = subview, let volume = volume {
     // do something with unwrapped subview and volume
 }
 ```
 
-**Not Preferred:**
-
-```swift
-var optionalSubview: UIView?
-var volume: Double?
-
-if let unwrappedSubview = optionalSubview {
-    if let realVolume = volume {
-        // do something with unwrappedSubview and realVolume
-    }
-}
-```
-
-关于可选值的其他规范参考了 [linkedin/**swift-style-guide**](https://github.com/linkedin/swift-style-guide#35-optionals)，如下：
-
--  只应该在 `@IBOutlet` 中使隐式解包。否则其他情况下就应该使用非可选值或者正常的可选值类型变量。虽然有时候你能保证某个变量肯定非 `nil` ，不过这样用的话还是比较安全并且能保证上下一致性。
+只应该在 `@IBOutlet` 和依赖注入中使隐式解包。否则其他情况下就应该使用非可选值或者正常的可选值类型变量。虽然有时候你能保证某个变量肯定非 `nil` ，不过这样用的话还是比较安全并且能保证上下一致性。
 
 注: [隐式解包 OPTIONAL](http://swifter.tips/implicitly-optional/)
 
--  如果你只是打算判断存放在 Optional 中的值是否为空，那么你应该直接与 `nil` 进行判断而不是使用 `if let` 语句将值取出来。
+如果你只是打算判断存放在 Optional 中的值是否为空，那么你应该直接与 `nil` 进行判断而不是使用 `if let` 语句将值取出来。
 
-**Preferred:**
-
-```swift
-if someOptional != nil {
-    // do something
-}
-```
-
-**Not Preferred:**
-
-```swift
-if let _ = someOptional {
-    // do something
-}
-```
-
--  可以将 `unowned` 当做对于 `weak` 变量的隐式解包，Apple 给我们的建议是如果能够确定在访问时被捕获对象不会已被释放的话，尽量使用 `unowned` ，如果存在被释放的可能，那就选择用`weak`。实际运用中一般非异步操作的时候不存在被捕获对象提前销毁的风险，此时可以使用 `unowned`， 其他时候使用 `weak` 则必须进行 [weak-strong dance](https://bestswifter.com/strong-weak-dance/) 处理。
+可以将 `unowned` 当做对于 `weak` 变量的隐式解包，Apple 给我们的建议是如果能够确定在访问时被捕获对象不会已被释放的话，尽量使用 `unowned` ，如果存在被释放的可能，那就选择用`weak`。实际运用中一般非异步操作的时候不存在被捕获对象提前销毁的风险，此时可以使用 `unowned`， 其他时候使用 `weak` 则必须进行 [weak-strong dance](https://bestswifter.com/strong-weak-dance/) 处理。
 
 weak-strong dance 标准格式如下：
 
 ```swift
 resource.request().onComplete { [weak self] response in
-    guard let strongSelf = self else { return }
+    guard let strongSelf = self else { 
+      return
+    }
     let model = strongSelf.updateModel(response)
     strongSelf.updateUI(model)
 }
@@ -720,14 +543,13 @@ resource.request().onComplete { [weak self] response in
 
 注：[内存管理，WEAK 和 UNOWNED](http://swifter.tips/retain-cycle/)
 
-- 当对可选值进行解包的时候，使用与可选值变量一致的变量名
+当对可选值进行解包的时候，使用与可选值变量一致的变量名
 
 ```swift
 guard let myValue = myValue else {
-    return
+   return
 }
 ```
-
 #### 类型推断
 
 使用更加紧凑的代码，让编译器能够推断出常量和变量的类型，类型推断对非空数组和字典适用。需要定义一个特定的类型(比如 `CGFloat` 和 `Int16` )的时候需要明确指定。
@@ -789,13 +611,21 @@ class TimeMachine {
 }
 ```
 
+属性必须是 `internal` 的才能在单元测试中用 `@testable import ModuleName` 取到。如果属性本来是 `private` 的需要声明为 `internal`，则在属性备注下添加一行 `- warning:` 
+
+```swift
+/**
+ This property defines the pirate's name.
+ - warning: Not `private` for `@testable`.
+ */
+let pirateName = "LeChuck"	
+```
+
 ### 控制流
 
 对枚举优先使用譬如 `case 1, 2, 3:` 这样的列表表达式而不是使用 `fallthrough` 关键字。
 
-推荐循环使用 `for-in` 表达式，而不使用 `for-condition-increment` 表达式。
-
-**Preferred:**
+推荐循环使用 `for-in` 表达式，而不使用 `while` 表达式。
 
 ```swift
 for _ in 0..<3 {
@@ -806,30 +636,12 @@ for (index, person) in attendeeList.enumerate() {
     print("\(person) is at position #\(index)")
 }
 
-for index in 0.stride(to: items.count, by: 2) {
+for index in stride(from: 0, to: item.count, by: 2) {
     print(index)
 }
 
 for index in (0...3).reverse() {
     print(index)
-}
-```
-
-**Not Preferred:**
-
-```swift
-var i = 0
-while i < 3 {
-    print("Hello three times")
-    i += 1
-}
-
-
-var i = 0
-while i < attendeeList.count {
-    let person = attendeeList[i]
-    print("\(person) is at position #\(i)")
-    i += 1
 }
 ```
 
@@ -868,35 +680,21 @@ for integer in [4, 8, 15, 16, 23, 42] {
 
 #### 属性命名
 
-- 控件不要使用缩写，且控件具体类型放在命名的最后。如 UILabel 命名为 xxxLabel，UIButton 命名为 xxxButton。
-- 控制器不要简写为 `VC`。普通 UIViewController 一般命名为 xxxViewController，变量名太长时也可为 xxxxxxxxxController，对于 UIViewController 的子类来说，命名必须明确的指出完整类型，如xxxTableViewController。
+控件不要使用缩写，且控件具体类型放在命名的最后。如 UILabel 命名为 xxxLabel，UIButton 命名为 xxxButton。
 
+控制器不要简写为 `VC`。普通 UIViewController 一般命名为 xxxViewController，变量名太长时也可为 xxxxxxxxxController，对于 UIViewController 的子类来说，命名必须明确的指出完整类型，如xxxTableViewController。
 
-- 不是很明显的类型需要将类型信息包含在属性名中。
+不是很明显的类型需要将类型信息包含在属性名中。
 
 ```swift
 class ConnectionTableViewCell: UITableViewCell {
-    // don`t use abbreviation
     let personImageView: UIImageView
-
-    // it is ok not to include string in the ivar name here because it is obvious
-    // that it is a string from the property name
     let firstName: String
-
-    // use animationDuration or animationTimeInterval
     let animationDuration: NSTimeInterval
-
-    // use Controller is ok
     let popupController: UIViewController
     let popupViewController: UIViewController
-
-    // when working with a subclass of UIViewController such as a table view
-    // controller, collection view controller, split view controller, etc.,
-    // fully indicate the type in the name.
     let popupTableViewController: UITableViewController
-
-    // when working with outlets, make sure to specify the outlet type in the
-    // property name.
+    
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var nameLabel: UILabel!
@@ -925,7 +723,7 @@ let centerPoint = CGPointMake(96, 42)
 
 #### 空格
 
-虽然在 RayWenderlich 的风格指南中指明用 2 个空格替代 Tabs ，但是在这个 issue: [Two versus four spaces in indent](https://github.com/raywenderlich/swift-style-guide/issues/107 "Optional title") 中也说明了这个风格指南主要是为了指导他们自己的出版物。而且两个空格风格的缩进确实难以阅读，所以我们还是采用 4 个空格的缩进风格。
+采用 4 个空格的缩进风格。
 
 方法定义的大括号或者其他大括号（`if`、`else`、`switch`、`while` 等）—— 般都放在定义名称的同一行，并且使用一个新的行来结束。
 
@@ -954,37 +752,9 @@ class TestDatabase: Database {
 
 Swift 不需要在你代码中的每一句表达式之后添加分号。只有在你需要在一行中连接多个表达式中，使用分号来区隔。不要在同一行编写多个使用分号区隔的表达式。
 
-**Preferred:**
-
-```swift
-let swift = "not a scripting language"
-```
-
-**Not Preferred:**
-
-```swift
-let swift = "not a scripting language";
-```
-
 #### 圆括号
 
 Swift 中条件语句的条件不需要圆括号包围。
-
-**Preferred:**
-
-```swift
-if name == "Hello" {
-    print("World")
-}
-```
-
-**Not Preferred:**
-
-```swift
-if (name == "Hello") {
-    print("World")
-}
-```
 
 #### 语法糖
 
@@ -1038,20 +808,20 @@ imageView.backgroundColor = .whiteColor()
 
 注：[Implicit Member Expression](https://developer.apple.com/library/ios/documentation/Swift/Conceptual/Swift_Programming_Language/Expressions.html#//apple_ref/doc/uid/TP40014097-CH32-ID394)
 
-#### Golden Path
+#### Guard 关键字
 
-当写条件语句时，左侧空白就是 "Golden" 或 "Happy" Path。宁愿使用多个 `return` 也不要滥用 `if`。`guard` 就是用来处理这种情况的。
+`guard` 语句不要和 `return` 放在同一行。代码嵌套度高时使用 `guard` 提早退出降低代码嵌套度。
 
 **Preferred:**
 
 ```swift
 func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies {
-
-    guard let context = context else { throw FFTError.noContext }
-    guard let inputData = inputData else { throw FFTError.noInputData }
-
-    // use context and input to compute the frequencies
-
+    guard let context = context else { 
+    	throw FFTError.noContext
+    }
+    guard let inputData = inputData else { 
+    	throw FFTError.noInputData
+    }
     return frequencies
 }
 ```
@@ -1060,11 +830,8 @@ func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies 
 
 ```swift
 func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies {
-
     if let context = context {
         if let inputData = inputData {
-            // use context and input to compute the frequencies
-
             return frequencies
         } else {
             throw FFTError.noInputData
@@ -1075,42 +842,13 @@ func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies 
 }
 ```
 
-对于多个可选值需要用 `guard let` 或者 `if let` 解包时，可以使用它们的复合形式来最小化滥用。
-
-**Preferred:**
-
-```swift
-guard let number1 = number1, number2 = number2, number3 = number3 else {    
-    fatalError("impossible")
-}
-// do something with numbers
-```
-
-**Not Preferred:**
-
-```swift
-if let number1 = number1 {
-    if let number2 = number2 {
-        if let number3 = number3 {
-            // do something with numbers
-        } else {
-            fatalError("impossible")
-        }
-    } else {
-        fatalError("impossible")
-    }
-} else {
-    fatalError("impossible")
-}
-```
-
 `guard `状态必须退出，通常情况下退出语句是像 `return`, `throw`, `break`, `continue `和 `fatalError()` 这样简单的一行代码，大的代码块需要避免。如果在多个出口退出时都想执行清理代码，可以使用 `defer` 代码块避免出现多个清理代码。
 
 ### 注释
 
-代码注释采用插件 `VVDocumenter`。
-
 属性注释需要用 `///`，方便生成文档和 Option键 + 左键查看注释。虽然 `//` 也被视为注释，但是这种语法会被 Xcode 忽略，而不产生对应的代码文档，所以尽量只在各种代码块中可以使用 `//` 来注释。
+
+`//` 注释时不要手动换行。
 
 `//`，`///` 后面总是要跟上一个空格。
 
@@ -1122,7 +860,7 @@ if let number1 = number1 {
 
 #### 提倡清晰的用法
 
-- **包含所有必需的词组以避免歧义**，当人们读代码的时候，命名就显得十分重要。
+- 包含所有必需的词组以避免歧义，当人们读代码的时候，命名就显得十分重要。
 
 **Preferred:**
 
@@ -1158,7 +896,7 @@ public mutating func removeElement(_ member: Element) -> Element?
 allViews.removeElement(cancelButton)
 ```
 
-- **变量、参数、关联类型依据作用对其进行命名**，而不是基于它们的类型。
+- 变量、参数、关联类型依据作用对其进行命名，而不是基于它们的类型。
 
 **Preferred:**
 
@@ -1192,7 +930,7 @@ class ProductionLine {
 > }
 > ```
 
-- **对弱类型信息进行补充**使其可以清晰描述参数的作用。
+- 对弱类型信息进行补充使其可以清晰描述参数的作用。
 
 当参数类型是弱类型，尤其是 `NSObject`、 `Any`、`AnyObject` 或者是诸如 `Int`、`String ` 之类的基本类型的时候，调用处的类型信息和上下文环境可能无法完全表明函数意图。
 
@@ -1212,13 +950,13 @@ grid.add(self, for: graphics) // vague
 
 #### 尽量流利的使用
 
-- **工厂方法以** `make` **为前缀**。
+- 工厂方法以 `make` 为前缀。
 
 ```swift
 x.makeIterator()
 ```
 
-- **构造器和工厂方法调用**时应由一个不包含第一实参的短语构成。
+- 构造器和工厂方法调用时应由一个不包含第一实参的短语构成。
 
 **Preferred:**
 
@@ -1253,9 +991,9 @@ let newPart = factory.makeWidget(havingGearCount: 42, andSpindleCount: 14)
   x.append(y)
   ```
 
-  - **Mutating 和 Nonmutating 方法名应该保持一致性**。一个 Mutating 方法通常有个语义上类似的 Nonmutating 变体。
+  - Mutating 和 Nonmutating 方法名应该保持一致性。一个 Mutating 方法通常有个语义上类似的 Nonmutating 变体。
 
-    - 当操作**使用动词描述**的时候，Mutating 方法用该动词的祈使语气做方法名，Nonmutating 方法为对该动词加 `ed`、`ing` 后缀。
+    - 当操作使用动词描述的时候，Mutating 方法用该动词的祈使语气做方法名，Nonmutating 方法为对该动词加 `ed`、`ing` 后缀。
 
     | Mutating      | Nonmutating          |
     | ------------- | -------------------- |
@@ -1269,14 +1007,14 @@ let newPart = factory.makeWidget(havingGearCount: 42, andSpindleCount: 14)
     funcstrippingNewlines() -> String                      
     ```
 
-    - 当操作**使用名词描述**的时候，Nonmutating 方法用该名词做方法名，Mutating 方法为对该名词加 `from` 前缀。
+    - 当操作使用名词描述的时候，Nonmutating 方法用该名词做方法名，Mutating 方法为对该名词加 `from` 前缀。
 
     | Nonmutating          | Mutating              |
     | -------------------- | :-------------------- |
     | `x = y.union(z)`     | `y.formUnion(z)`      |
     | `j = c.successor(i)` | `c.formSuccessor(&i)` |
 
-- Nonmutating 的 **Bool 属性和返回 Bool 值的方法读起来应该像是断言**：
+- Nonmutating 的 Bool 属性和返回 Bool 值的方法读起来应该像是断言：
 
 ```swift
 x.isEmpty
@@ -1287,7 +1025,7 @@ line1.intersects(line2)
 
 #### 一般约定
 
-- **优先考虑方法和属性，而不是自由函数**。自由函数只在几种特殊情况下才能使用：
+- 优先考虑方法和属性，而不是自由函数。自由函数只在几种特殊情况下才能使用：
 
   - 当没有明显的 `self` 对象的时候：
 
@@ -1307,11 +1045,11 @@ line1.intersects(line2)
   sin(x)
   ```
 
-- **当多个方法拥有相同的基础含义的时候，可以使用相同的名字重载**，特别是对于有不同的参数类型，或者在不同的作用域范围内的方法。但要避免返回类型的重载，因为这会导致在类型推断的时候出现歧义
+- 当多个方法拥有相同的基础含义的时候，可以使用相同的名字重载，特别是对于有不同的参数类型，或者在不同的作用域范围内的方法。但要避免返回类型的重载，因为这会导致在类型推断的时候出现歧义。
 
 #### 参数
 
-- **充分利用参数默认值**，这样可以简化常用的操作。一般情况下，如果一个参数经常使用某一个值的话，那么可以考虑将这个值设置为默认值。
+- 充分利用参数默认值，这样可以简化常用的操作。一般情况下，如果一个参数经常使用某一个值的话，那么可以考虑将这个值设置为默认值。
 
 默认参数通过隐藏不相关的信息提高了方法的可读性。
 
@@ -1327,46 +1065,11 @@ let order = lastName.compare(royalFamilyName)
 let order = lastName.compare(royalFamilyName, options: [], range: nil, locale: nil)
 ```
 
-- **最好将带有默认值的参数放在参数列表的最后面**。不带默认值的参数对于方法来说更重要，并且当方法调用的时候可以提供一个稳定的初始化范式。
+- 最好将带有默认值的参数放在参数列表的最后面。不带默认值的参数对于方法来说更重要，并且当方法调用的时候可以提供一个稳定的初始化范式。
 
 #### 参数标签（参数外部名）
 
-Swift 3 对参数的传入做了大幅改动，主要是添加了参数名称的限定，在 Swift 3 下，一个方法所接受的参数必须拥有参数标签，如果依然想参数没有参数标签，那么可以使用单个下划线作为允许匿名符号。
-
-从 Swift 2.2 迁移到 Swift 3 时基本不用对参数标签做额外设置，编译器会为我们完成。
-
-**Swift 2.2**
-
-```swift
-func removeBoxes(havingLength length: Int) { }
-func moveTo(x x: CGFloat, y: CGFloat) { }
-func haveNoFirstLabel(label: String) { }
-func haveFirstLabel(firstLabel label: String) { }
-
-removeBoxes(havingLength: 12)
-moveTo(x: 10, y: 10)
-haveNoFirstLabel("noLabel")
-haveFirstLabel(firstLabel: "haveLabel")
-```
-
-以上代码编译器可以自动转换为如下代码：
-
-**Swift 3**
-
-```swift
-func removeBoxes(havingLength length: Int) { }
-func moveTo(x: CGFloat, y: CGFloat) { }             ←2.2中的外部标签被去掉
-func haveNoFirstLabel(_ label: String) { }          ←3中自动添加下划线
-func haveFirstLabel(firstLabel label: String) { }
-
-// 方法调用和 2.2 一样，只是声明被编译器自动修改
-removeBoxes(havingLength: 12)
-moveTo(x: 10, y: 10)
-haveNoFirstLabel("noLabel")
-haveFirstLabel(firstLabel: "haveLabel")
-```
-
-**注意**：以下代码都是 Swift 3
+在 Swift 3 下，一个方法所接受的参数必须拥有参数标签，如果依然想参数没有参数标签，那么可以使用单个下划线作为允许匿名符号。
 
 - **当不同参数不能被有效区分时，删除所有参数标签**。
 
@@ -1391,7 +1094,7 @@ text += " and in hexadecimal, it's"
 text += String(veryLargeNumber, radix: 16)
 ```
 
-对于有损(narrowing)类型的转换，推荐使用参数标签来描述这个特定类型：
+对于有损类型的转换，推荐使用参数标签来描述这个特定类型：
 
 > “无损类型转换”的意思是，对于执行类型转换（参数是待转换的类型，构造器所在的类是要转换的目标类型）的构造器来说，“无损”意味着待转换类型的存储空间小于等于目标类型所占用的存储空间，比如说 `Int32` 转换为 `Int64`，编译器直接将 `Int32` 放到 `Int64` 所在的内存当中，不足的部分会自动用 `0` 补齐。
 >
@@ -1477,7 +1180,7 @@ doc.closeWithCompletionHandler()   // 完成后处理什么呢 ？
 
 ### 目录命名
 
-- 文件名尽量不用单词缩写。
+- 文件名不用单词缩写。
 
 - 文件名采用帕斯卡命名法，第一个单词首字母采用大写字母，后续单字的首字母亦用大写字母。
 
@@ -1487,7 +1190,7 @@ doc.closeWithCompletionHandler()   // 完成后处理什么呢 ？
 
 - Swift 中扩展没有名字，扩展文件的文件名就跟 Object-C 保持一致使用 `类型+功能` 方式，如 `UIKit+Rx`。不要使用 `类型+Extension` 这种一个文件包含全部扩展功能的命名。
 
-- MVVM 中 `V` 和 `VM` 命名应该一致，如 `LoginViewController`，`LoginViewModel`，`LoginViewModelType`。
+- MVVM 中 `V` 和 `VM` 命名应该一致，如 `LoginViewController`，`LoginViewModel`。
 
 
 ### 文件结构
@@ -1496,19 +1199,20 @@ doc.closeWithCompletionHandler()   // 完成后处理什么呢 ？
 
 1. Import
 2. typealias 重命名
-3. 定义文件范围 `private` 属性
-4. 定义闭包
-5. 定义枚举、结构体、协议
+3. 定义闭包
+4. 定义枚举、结构体、协议
 
 #### 类型内部结构
 
-**如果一组方法联系密切，将它们放在同一个扩展中并用 `// MARK: -` 注释，如生命周期，点击事件等。**
+如果一组方法联系密切，将它们放在同一个扩展中并用 `// MARK: -` 注释，如生命周期，点击事件等。
 
 注：[Using Swift Extensions The “Wrong” Way](https://www.natashatherobot.com/using-swift-extensions/)，翻译：[使用Swift扩展的“错误”方式](http://geek.csdn.net/news/detail/67296)
 
-1. @IBOutlet 属性（可以通过 didSet 给控件赋值）
+1. 嵌套类型
 
-2. 公有属性
+2. @IBOutlet 属性（可以通过 didSet 给控件赋值）
+
+3. 公有属性
 
    - 存储属性
    - 计算属性
@@ -1534,25 +1238,21 @@ doc.closeWithCompletionHandler()   // 完成后处理什么呢 ？
    }()  
    ```
 
-3. 私有属性
-
-   细分见上公有属性
-
-4. 嵌套类型
+4. 私有属性（细分见上公有属性）
 
 5. 生命周期
 
 6. setup 方法
 
-7. @IBAction
+7. action 方法
 
-8. 实现系统协议和自定义协议
+8. 网络请求或请求回调（VM 中为请求，V 中就是请求回调）
 
-9. 网络请求或请求回调（VM 中为请求，V 中就是请求回调）
+9. 实现系统协议和自定义协议
 
 10. private 方法
 
-   比较通用的私有方法单独提出到一个 `private extension` 中且不用再加 `private` 标明，但如果私有方法只跟某个功能模块或方法相关，则它们应该放在一起不用单独提出来。
+   比较通用的私有方法单独提出到一个 `private extension` 中且不用再加 `private` 标明，但如果私有方法只跟某个功能模块或方法相关，则它们可以使用嵌套函数。
 
 #### 私有嵌套类型
 
@@ -1562,7 +1262,7 @@ doc.closeWithCompletionHandler()   // 完成后处理什么呢 ？
 // private var DescriptiveName = "nsh_DescriptiveName"
 
 extension UIViewController {
-    private struct AssociatedKeys {
+    private enum AssociatedKeys {
         static var DescriptiveName = "nsh_DescriptiveName"
     }
 
