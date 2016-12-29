@@ -129,7 +129,7 @@ let sel = #selector(ViewController.viewDidLoad)
 ```
 #### 泛型
 
-泛型参数应该是 uppercamelcase 形式，尽量使参数名描述它的作用，如果参数名并没有有意义的关系或角色，那么就用单个大写字母表示：`T`, `U`,或 `V`。
+泛型参数应该是 uppercamelcase 形式，尽量使参数名描述它的作用，如果参数名并没有有意义的关系或角色，那么就用单个大写字母表示：`T`, `U`,或 `V`。
 
 ```swift
 struct Stack<Element> { ... }
@@ -492,7 +492,7 @@ let widthString: NSString = width.stringValue        // NSString
 
 常量定义使用 `let` 关键字，变量定义使用 `var` 关键字，如果变量的值不需要改变，请尽量使用 `let` 关键字。可以先使用 `let` 定义任何东西，只有在编译器告诉我们值需要改变的时候才改成 `var` 定义。
 
-使用 `static let` 将常量定义为类属性而不是实例属性，定义为类属性而不是全局常量是因为在实际运用中类属性不会和局部变量和实例属性混淆。所有的类常量需要被包含在一个 `enum`  容器中（不可初始化，比 `class` 和 `struct` 好）。且该容器名是个单数（ 用 `Constant`  而不是  `Constants`）且能表示它是个常量容器，如果不能明确表示时给它加上 `Constant` 后缀。
+使用 `static let` 将常量定义为类属性而不是实例属性，定义为类属性而不是全局常量是因为在实际运用中类属性不会和局部变量和实例属性混淆。所有的类常量需要被包含在一个 `enum`  容器中（不可初始化，比 `class` 和 `struct` 好）。且该容器名是个单数（ 用 `Constant`  而不是  `Constants`）且能表示它是个常量容器，如果不能明确表示时给它加上 `Constant` 后缀。
 
 ```swift
 enum AccessibilityIdentifier {
@@ -525,7 +525,7 @@ if let subview = subview, let volume = volume {
 
 如果你只是打算判断存放在 Optional 中的值是否为空，那么你应该直接与 `nil` 进行判断而不是使用 `if let` 语句将值取出来。
 
-可以将 `unowned` 当做对于 `weak` 变量的隐式解包，Apple 给我们的建议是如果能够确定在访问时被捕获对象不会已被释放的话，尽量使用 `unowned` ，如果存在被释放的可能，那就选择用`weak`。实际运用中一般非异步操作的时候不存在被捕获对象提前销毁的风险，此时可以使用 `unowned`， 其他时候使用 `weak` 则必须进行 [weak-strong dance](https://bestswifter.com/strong-weak-dance/) 处理。
+可以将 `unowned` 当做对于 `weak` 变量的隐式解包，Apple 给我们的建议是如果能够确定在访问时被捕获对象不会已被释放的话，尽量使用 `unowned` ，如果存在被释放的可能，那就选择用`weak`。实际运用中一般非异步操作的时候不存在被捕获对象提前销毁的风险，此时可以使用 `unowned`， 其他时候使用 `weak` 则必须进行 [weak-strong dance](https://bestswifter.com/strong-weak-dance/) 处理。
 
 weak-strong dance 标准格式如下：
 
@@ -723,7 +723,7 @@ let centerPoint = CGPointMake(96, 42)
 
 采用 4 个空格的缩进风格。
 
-方法定义的大括号或者其他大括号（`if`、`else`、`switch`、`while` 等）—— 般都放在定义名称的同一行，并且使用一个新的行来结束。
+方法定义的大括号或者其他大括号（`if`、`else`、`switch`、`while` 等）—— 般都放在定义名称的同一行，并且使用一个新的行来结束。
 
 ```swift
 if someBoolean {
