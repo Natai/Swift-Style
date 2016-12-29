@@ -175,9 +175,55 @@ extension Swift {
 }
 ```
 
-#### 最小量的导入
+#### 空行
 
-保持最小量的导入，比如当导入 `Foundation` 能够满足需求的时候就不要导入 `UIKit`。
+类型或者 `extension` 结构内，上下不留空行。各个 `extension` 之间， 各个 `func` 之间和单个文件的底部留且只留一个空行。
+
+```swift
+//: Playground - noun: a place where people can play
+
+import Foundation
+
+typealias Speed = Float
+
+enum FlightState {
+    case fast, slow
+}
+
+class Swift {
+    var speed: Speed = 10
+}
+
+extension Swift {
+    func fly() {
+        print("飞行速度为\(speed)")
+    }
+}
+
+```
+
+#### 对齐
+
+采用 4 个空格的缩进风格。各个变量声明后的 `:`、 `=` 不要手动对齐。
+
+方法定义的大括号或者其他大括号（`if`、`else`、`switch`、`while` 等）放在定义名称的同一行，并且使用一个新的行来结束。
+
+```swift
+if someBoolean {
+    // do something
+} else {
+    // do something else
+}
+```
+
+冒号的左边总是没有空格右边总是有空格。当它存在于三目运算 `? :` 或者空字典 `[:]` 里面时是个例外。
+
+```swift
+class TestDatabase: Database {
+    var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
+    var tmp = 2 > 1 ? true : false
+}
+```
 
 ### 类和结构体
 
@@ -531,9 +577,7 @@ weak-strong dance 标准格式如下：
 
 ```swift
 resource.request().onComplete { [weak self] response in
-    guard let strongSelf = self else { 
-      return
-    }
+    guard let strongSelf = self else { return }
     let model = strongSelf.updateModel(response)
     strongSelf.updateUI(model)
 }
@@ -544,9 +588,7 @@ resource.request().onComplete { [weak self] response in
 当对可选值进行解包的时候，使用与可选值变量一致的变量名
 
 ```swift
-guard let myValue = myValue else {
-   return
-}
+guard let myValue = myValue else { return }
 ```
 #### 类型推断
 
@@ -719,33 +761,6 @@ let centerPoint = CGPointMake(96, 42)
 
 推荐使用结构体限定的常量 `CGRect.infiniteRect`，`CGRect.nullRect`，`CGRect.zero` 等，来替代全局常量 `CGRectInfinite`，`CGRectNull`，`CGRectZero` 等。
 
-#### 空格
-
-采用 4 个空格的缩进风格。
-
-方法定义的大括号或者其他大括号（`if`、`else`、`switch`、`while` 等）—— 般都放在定义名称的同一行，并且使用一个新的行来结束。
-
-```swift
-if someBoolean {
-    // do something
-} else {
-    // do something else
-}
-```
-
-提示：你可以通过以下方法重新进行缩进：选择一些代码（或者使用 ⌘A 选择所有），然后按 Control-I (或者点击菜单栏 Editor\Structure\Re-Indent）。
-
-应该在方法之间空出一行，从视觉上有更好的区分和组织。方法内的空白行隔开不同的功能，但是当一个方法中有很多段落时应该将该方法重构成几个方法。
-
-冒号的左边总是没有空格右边总是有空格。当它存在于三目运算 `? :` 或者空字典 `[:]` 里面时是个例外。
-
-```swift
-class TestDatabase: Database {
-    var data: [String: CGFloat] = ["A": 1.2, "B": 3.2]
-    var tmp = 2 > 1 ? true : false
-}
-```
-
 #### 分号
 
 Swift 不需要在你代码中的每一句表达式之后添加分号。只有在你需要在一行中连接多个表达式中，使用分号来区隔。不要在同一行编写多个使用分号区隔的表达式。
@@ -808,7 +823,7 @@ imageView.backgroundColor = .whiteColor()
 
 #### Guard 关键字
 
-`guard` 语句不要和 `return` 放在同一行。代码嵌套度高时使用 `guard` 提早退出降低代码嵌套度。
+`guard` 的 `else` 语句只有一个 `return` 的时候可以放在同一行。代码嵌套度高时使用 `guard` 提早退出降低代码嵌套度。
 
 **Preferred:**
 
@@ -840,17 +855,17 @@ func computeFFT(context: Context?, inputData: InputData?) throws -> Frequencies 
 }
 ```
 
-`guard `状态必须退出，通常情况下退出语句是像 `return`, `throw`, `break`, `continue `和 `fatalError()` 这样简单的一行代码，大的代码块需要避免。如果在多个出口退出时都想执行清理代码，可以使用 `defer` 代码块避免出现多个清理代码。
+`guard ` 状态必须退出，通常情况下退出语句是像 `return`, `throw`, `break`, `continue `和 `fatalError()` 这样简单的一行代码，大的代码块需要避免。如果在多个出口退出时都想执行清理代码，可以使用 `defer` 代码块避免出现多个清理代码。
 
 ### 注释
 
-属性注释需要用 `///`，方便生成文档和 Option键 + 左键查看注释。虽然 `//` 也被视为注释，但是这种语法会被 Xcode 忽略，而不产生对应的代码文档，所以尽量只在各种代码块中可以使用 `//` 来注释。
+属性和函数注释直接使用快捷键 `⌘ + ⌥ + /` 得到 `///`，方便生成文档和 Option键 + 左键查看注释。虽然 `//` 也被视为注释，但是这种语法会被 Xcode 忽略，而不产生对应的代码文档，所以尽量只在各种代码块中可以使用 `//` 来注释。
 
 `//` 注释时不要手动换行。
 
 `//`，`///` 后面总是要跟上一个空格。
 
-注：[在 Xcode 中使用 Markdown 生成 Swift 代码文档](http://swift.gg/2016/06/15/swift-markdown/)
+注释始终在需要被注释代码上侧，且之间不留空行
 
 ## **API Design Guidelines**
 
